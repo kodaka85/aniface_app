@@ -1,0 +1,50 @@
+<!-- 親テンプレートを読み込む-->
+{% extends './base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="mt-5 text-center">
+      <div class="alert alert-primary alert-dismissible" role="alert">
+        <p style="margin-bottom:1em;">
+          <h3><b>アニメ画像判定AIアプリの説明</b></h3>
+        </p>
+        <hr>
+        <h4>
+          <ol>
+            <li style="margin-bottom:1em;" align="left">あなたの顔写真(png形式)をアップロード後に「判定」
+              ボタンを押してください。</li>
+            <li style="margin-bottom:1em;" align="left">ファイル画像の形式は<font color=red>「PNG」</font>
+            </li>
+            <li style="margin-bottom:1em;" align="left">アップロードされた画像の特徴を解析してAIがあなたに最も似ているアニメキャラを
+              自動判定します。</li>
+            <li style="margin-bottom:1em;" align="left">画像は顔が真ん中に写っていると判定確率が高くなります。</li>
+            <li style="margin-bottom:1em;" align="left">画像ファイルは複数同時に選択してアップロードすることができます。</li>
+          </ol>
+        </h4>
+      </div>
+    </div>
+    <hr>
+    <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
+      <div style="display:inline-flex">
+        <input type="file" name="picture">
+      </div>
+      <input type="submit" class="btn btn-lg btn-danger" value="判定">
+      {% csrf_token %}
+    </form>
+
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+      <h4>
+        <font color="red">{{message}}<br></font>
+      </h4>
+    </div>
+    {% endif %}
+
+
+    <!-- 画像表示 -->
+
+    <!-- 画像表示 -->
+  </div>
+</div>
+{% endblock content %}
